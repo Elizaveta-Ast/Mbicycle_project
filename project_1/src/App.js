@@ -10,24 +10,24 @@ class App extends React.Component{
         users: [
           {
             id: 1,
-            firstname: "Михаил",
-            lastname: "Александрович",
+            first_name: "Михаил",
+            last_name: "Александрович",
             bio: "Энергетик",
             age: 54,
             isHappy: false
           },
           {
             id: 2,
-            firstname: "Александр",
-            lastname: "Иванов",
+            first_name: "Александр",
+            last_name: "Иванов",
             bio: "Техник-программист",
             age: 23,
             isHappy: true
           },
           {
             id: 3,
-            firstname: "Анна",
-            lastname: "Будько",
+            first_name: "Анна",
+            last_name: "Будько",
             bio: "Преподаватель",
             age: 23,
             isHappy: true
