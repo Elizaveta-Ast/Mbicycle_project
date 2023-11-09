@@ -46,7 +46,8 @@ function App(){
 
   return (
     <div>
-      <Header title="Список пользователей" />
+      <Header title="Список пользователей">
+      </Header>
       <main>
         <Users onEdit={editUser} users={users} onDelete={deleteUser} />
       </main>
