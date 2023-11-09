@@ -1,41 +1,90 @@
-import React from "react"
+import React, { useState } from "react";
+import Checkbox from '@mui/material/Checkbox';
+import { FormLabel } from "@mui/material";
+import Button from "@mui/material/Button";
+import { makeStyles } from "@mui/styles";
+import TextField from "@mui/material/TextField";
+import FormControl from '@mui/material/FormControl';
 
-class AddUser extends React.Component{
-    userAdd = {}
-    constructor(props){
-        super(props)
-        this.state = {
-            first_name: "",
-            last_name: "",
-            bio: "",
-            age: 1,
-            isHappy: false
-        }
-    }
-    render(){
-        return(
-            <form ref={(el) => this.myForm = el}>
-                <input placeholder="Имя" onChange={(e) => this.setState({ first_name: e.target.value})}/>
-                <input placeholder="Фамилия" onChange={(e) => this.setState({ last_name: e.target.value})}/>
-                <textarea placeholder="БИО" onChange={(e) => this.setState({ bio: e.target.value})}/>
-                <input placeholder="Возраст" onChange={(e) => this.setState({ age: e.target.value})}/>
-                <label htmlFor="isHappy" >Счастлив?</label>
-                <input type="checkbox" id="isHappy" onChange={(e) => this.setState({ isHappy: e.target.checked})}/>
-                <button type="button" onClick={() => {
-                    this.myForm.reset()
-                    this.userAdd ={
-                        first_name: this.state.firstname,
-                        last_name: this.state.lastname,
-                        bio: this.state.bio,
-                        age: this.state.age,
-                        isHappy: this.state.isHappy
-                    }
-                    if(this.props.user)
-                        this.userAdd.id = this.props.user.id
-                    this.props.onAdd(this.userAdd)}}>Добавить</button>
-            </form>
-        )
-    }
+//функция которая принимает объекты user, onAdd
+function AddUser({ user, onAdd }) {
+    //создание состояния с именем ... и функцией set... для его обновления
+  const [firstName, setFirstName] = useState(""); 
+  const [lastName, setLastName] = useState("");
+  const [bio, setBio] = useState("");
+  const [age, setAge] = useState(1);
+  const [isHappy, setIsHappy] = useState(false);
+
+/* Объявляется функция handleSubmit, 
+которая будет вызываться при отправке формы. 
+Она принимает объект события e в качестве аргумента.*/
+  const handleSubmit = (e) => {
+    e.preventDefault(); //предотвращение перегрузки страницы
+
+    //объект, который хранит значения из состояний ...
+    const userAdd = {
+      first_name: firstName,
+      last_name: lastName,
+      bio: bio,
+      age: age,
+      isHappy: isHappy,
+    };
+
+    if (user) userAdd.id = user.id;
+
+    onAdd(userAdd);
+
+    setFirstName("");
+    setLastName("");
+    setBio("");
+    setAge(1);
+    setIsHappy(false);
+  };
+
+  const useStyles = makeStyles({
+    root: {
+      background: 'linear-gradient(rgba(107, 163, 1, 0.566), rgba(128, 197, 0, 0.566), rgba(128, 197, 0, 0.566))',
+      border: 0,
+      borderRadius: 3,
+      boxShadow: '0 3px 5px 2px rgba(107, 163, 1, 0.566)',
+      height: 48,
+      padding: '0 30px',
+    },
+  });
+
+  const inputStyles = makeStyles({
+    root: {
+      width: '100%',
+      border: 0,
+      color: 'black',
+      outline: 'none',
+      height: '80px',
+      color: 'rgba(128, 197, 0, 0.566)',
+    },
+  });
+
+  const labelStyles = makeStyles({
+    root: {
+      margin: '15px',
+      width: '20ch',
+    },
+  });
+
+  const classesButton = useStyles();
+  const classesInput = inputStyles();
+  const classesLabel = labelStyles();
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <TextField className={classesInput.root} label="Имя" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+      <TextField className={classesInput.root} label="Фамилия" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+      <TextField className={classesInput.root} label="БИО" value={bio} onChange={(e) => setBio(e.target.value)} />
+      <TextField className={classesInput.root} label="Возраст" value={age} onChange={(e) => setAge(e.target.value)}/>
+      <FormLabel className={classesLabel.root} htmlFor="isHappy">Счастлив?</FormLabel>
+      <Checkbox type="checkbox" id="isHappy" checked={isHappy} onChange={(e) => setIsHappy(e.target.checked)}/>
+      <Button type="submit"  className={classesButton.root}>Добавить</Button>
+    </form>
+  );
 }
 
-export default AddUser
+export default AddUser;

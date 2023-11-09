@@ -8,21 +8,14 @@
 }
 
 body{
-    background-color: rgb(96, 129, 97);
+    background-color: rgb(255, 255, 255);
     color: white;
     font-family: 'Sometype Mono', monospace;
     font-weight: 300;
 }
 
-.header{
-    background-color: rgb(49, 80, 42);
-    padding: 25px 100px;
-    font-size: 25px;
-    font-weight: 600;
-}
-
 main{
-    margin: 50px 100px;
+    margin: 140px 100px;
     width: 50%;
     float: left;
 }
@@ -36,13 +29,14 @@ aside{
 
 main .user{
     margin-bottom: 50px;
-    background-color: rgba(49, 80, 42, 0.631);
+    background-color: rgba(152, 233, 2, 0.786);
+    color: rgb(0, 16, 35);
     padding: 20px;
 }
 
 main .delete-icon{
     float: right;
-    color: rgb(178, 253, 177);
+    color: rgb(102, 158, 0);
     cursor: pointer;
     transform: scale(2);
 }
@@ -50,7 +44,7 @@ main .delete-icon{
 main .edit-icon{
     float: right;
     margin-right: 25px;
-    color: rgb(178, 253, 177);
+    color: rgb(102, 158, 0);
     cursor: pointer;
     transform: scale(2);
 }
@@ -60,15 +54,16 @@ main .edit-icon:hover{
     opacity: 0.5;
 }
 
+form{
+    margin-top: 100px;
+}
+
 form input:not([type="checkbox"]), form textarea, form button{
-    width: 90%;
     padding: 15px 5%;
     font-family: 'Sometype Mono', monospace;
     font-weight: 300;
-    margin-bottom: 10px;
-    border: 0;
-    background:rgb(49, 80, 42);
-    color: white;
+    background:rgba(128, 197, 0, 0.566);
+    color: black;
     outline: none;
 }
 
@@ -93,7 +88,8 @@ form button:hover {
 .user form input,
 .user form textarea,
 .user form button{
-    background: rgba(178, 253, 177, 0.391);
+    background: rgba(128, 197, 0, 0.566);
+    color: #000;
 }
 
 .user form button:hover {
