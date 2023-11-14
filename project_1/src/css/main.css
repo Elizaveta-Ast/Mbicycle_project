@@ -15,28 +15,28 @@ body{
 }
 
 main{
-    margin: 140px 100px;
+    margin: 100px 100px;
     width: 50%;
     float: left;
 }
 
 aside{
     width: 20%;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 5%;
     float: left;
 }
 
 main .user{
-    margin-bottom: 50px;
-    background-color: rgba(152, 233, 2, 0.786);
+    margin-bottom: 30px;
+    background-color: rgba(220, 215, 196, 0.963);
     color: rgb(0, 16, 35);
     padding: 20px;
 }
 
 main .delete-icon{
     float: right;
-    color: rgb(102, 158, 0);
+    color: rgb(139, 139, 108);
     cursor: pointer;
     transform: scale(2);
 }
@@ -44,7 +44,7 @@ main .delete-icon{
 main .edit-icon{
     float: right;
     margin-right: 25px;
-    color: rgb(102, 158, 0);
+    color: rgb(139, 139, 108);
     cursor: pointer;
     transform: scale(2);
 }
@@ -62,13 +62,14 @@ form input:not([type="checkbox"]), form textarea, form button{
     padding: 15px 5%;
     font-family: 'Sometype Mono', monospace;
     font-weight: 300;
-    background:rgba(128, 197, 0, 0.566);
+    background:rgba(186, 186, 151, 0.697);
     color: black;
     outline: none;
 }
 
 form input[type="checkbox"] {
     margin: 10px;
+    background-color: rgb(70, 70, 70);
 }
 
 form button {
@@ -85,12 +86,6 @@ form button:hover {
     margin-top: 20px;
 }
 
-.user form input,
-.user form textarea,
-.user form button{
-    background: rgba(128, 197, 0, 0.566);
-    color: #000;
-}
 
 .user form button:hover {
     transform: scale(1.01);
