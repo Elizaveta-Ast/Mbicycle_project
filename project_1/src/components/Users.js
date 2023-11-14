@@ -1,5 +1,7 @@
 import React from 'react'
 import User from './User'
+import { connect } from 'react-redux';
+import { deleteUser, editUser } from './actions';
 
 function Users(props) {
   if (props.users.length > 0) {
@@ -21,4 +23,13 @@ function Users(props) {
   }
 }
 
-export default Users
+const mapStateToProps = (state) => ({
+  users: state.users,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onDelete: (id) => dispatch(deleteUser(id)),
+  onEdit: (user) => dispatch(editUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
