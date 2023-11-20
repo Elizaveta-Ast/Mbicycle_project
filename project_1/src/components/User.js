@@ -3,28 +3,41 @@ import { IoCloseCircleSharp, IoHammerSharp } from "react-icons/io5";
 import AddUser from "./AddUser";
 import { connect } from "react-redux";
 import { deleteUser, editUser } from "./actions";
+import { useNavigate } from "react-router";
+import EditUser from "./EditUser";
 
 function User({ user, onDelete, onEdit, onCancelEdit }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
+  // const [editForm, setEditForm] = useState(false);
+  // const [editedUser, setEditedUser] = useState({ ...user });
+  const navigate = useNavigate();
+
 
   const handleEditClick = () => {
-    onEdit(user);
-    setIsEditing(true);
-    setEditForm(!editForm);
+    // setEditForm(!editForm);
+    navigate("/edit");
   };
 
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-    onCancelEdit();
-  };
+  // const handleSaveEdit = () => {
+  //   onEdit(editedUser);
+  //   setIsEditing(false);
+  // };
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setEditedUser((prevUser) => ({
+  //     ...prevUser,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <div>
-      {isEditing ? (
-        editForm && <AddUser user={user} onAdd={onEdit} onCancelEdit={handleCancelEdit} />
+      {/* {isEditing ? (
+        editForm && <AddUser user={editedUser} onAdd={handleSaveEdit}
+        onInputChange={handleInputChange} />
       ) : (
-        <>
+        <> */}
           <div className="user-container">
             <div className="user-image">
               <img src={user.photo} alt={`${user.firstName} ${user.lastName}`} />
@@ -42,15 +55,14 @@ function User({ user, onDelete, onEdit, onCancelEdit }) {
               </div>
             </div>
           </div>
-        </>
+        {/* </>
       )
-    }
+    } */}
   </div>
 );}
 
 const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => dispatch(deleteUser(id)),
-  onEdit: (user) => dispatch(editUser(user)),
 });
 
 export default connect(null, mapDispatchToProps)(User);

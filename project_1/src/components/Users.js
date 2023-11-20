@@ -2,18 +2,8 @@ import React from 'react'
 import User from './User'
 import { connect } from 'react-redux';
 import { deleteUser, editUser } from './actions';
-import { useState } from 'react';
 
-function Users(props, onCancelEdit) {
-  const [editingUserId, setEditingUserId] = useState(null);
-
-  const startEditing = (userId) => {
-    setEditingUserId(userId);
-  };
-
-  const cancelEditing = () => {
-    setEditingUserId(null);
-  };
+function Users(props) {
 
   return (
     <div>
@@ -24,9 +14,6 @@ function Users(props, onCancelEdit) {
               onEdit={props.onEdit}
               onDelete={props.onDelete}
               user={el}
-              startEditing={startEditing}
-              cancelEditing={cancelEditing}
-              isEditing={editingUserId === el.id}
             />
           </div>
         ))

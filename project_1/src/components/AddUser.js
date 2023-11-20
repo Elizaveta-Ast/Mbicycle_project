@@ -6,64 +6,58 @@ import { connect } from 'react-redux';
 import { addUser, editUser } from "./actions";
 import { useNavigate  } from "react-router";
 
-// Функция, которая принимает объекты user, onAdd и onEdit
-function AddUser({ user, onAdd, onEdit, onCancelEdit }) { 
+function AddUser({ user, onAdd, onEdit }) {
   const navigate = useNavigate();
   const [showUsers, setShowUsers] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
 
-  // Создание состояний и функций для их обновления
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState(1);
-  const [job, setJob] = useState("");
-  const [bio, setBio] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-  const [quote, setQuote] = useState("");
+  useEffect(() => {
+    if (user) {
+      setFormData({ ...user });
+    }
+  }, [user]);
 
-  
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    age: 1,
+    job: "",
+    bio: "",
+    country: "",
+    city: "",
+    quote: "",
+  });
 
-  // Функция, вызываемая при отправке формы
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userAdd = {
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      job: job,
-      bio: bio,
-      country: country,
-      city: city,
-      quote: quote,
-    };
+    const userAdd = { ...formData };
 
     if (user && user.id) {
       userAdd.id = user.id;
-      onEdit(userAdd); // Вызываем onEdit для редактирования существующего пользователя
+      onEdit(userAdd);
     } else {
-      onAdd(userAdd); // Вызываем onAdd для добавления нового пользователя
+      onAdd(userAdd);
     }
 
-    // Очистка полей после добавления/редактирования пользователя
-    setFirstName("");
-    setLastName("");
-    setAge(1);
-    setJob("");
-    setBio("");
-    setCountry("");
-    setCity("");
-    setQuote("");
+    setFormData({
+      firstName: "",
+      lastName: "",
+      age: 1,
+      job: "",
+      bio: "",
+      country: "",
+      city: "",
+      quote: "",
+    });
+
     navigate("/users");
-
-    setShowUsers(true);
-  };
-
-  const [editForm, setEditForm] = useState(false);
-
-  const handleEditClick = () => {
-    setIsEditing(false);
-    setEditForm(false);
   };
 
   // Стили MUI компонентов
@@ -114,18 +108,15 @@ function AddUser({ user, onAdd, onEdit, onCancelEdit }) {
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
       <div className={classes.label}>{user ? 'Редактирование пользователя' : 'Добавление пользователя' }</div>
-      <TextField className={classes.input} variant="standard" label="Имя" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-      <TextField className={classes.input} variant="standard" label="Фамилия" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-      <TextField className={classes.input} variant="standard" label="Возраст" value={age} onChange={(e) => setAge(e.target.value)}/>
-      <TextField className={classes.input} variant="standard" label="Должность" value={job} onChange={(e) => setJob(e.target.value)}/>
-      <TextField className={classes.input} variant="standard" label="БИО" value={bio} onChange={(e) => setBio(e.target.value)} />
-      <TextField className={classes.input} variant="standard" label="Старана" value={country} onChange={(e) => setCountry(e.target.value)}/>
-      <TextField className={classes.input} variant="standard" label="Город" value={city} onChange={(e) => setCity(e.target.value)}/>
-      <TextField className={classes.input} variant="standard" label="Цитата" value={quote} onChange={(e) => setQuote(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="Имя" name="firstName" value={formData.firstName} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Фамилия" name="lastName" value={formData.lastName} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Возраст" name="age" value={formData.age} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Должность" name="job" value={formData.job} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="БИО" name="bio" value={formData.bio} onChange={handleChange} />
+      <TextField className={classes.input} variant="standard" label="Страна" name="country" value={formData.country} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Город" name="city" value={formData.city} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Цитата" name="quote" value={formData.quote} onChange={handleChange}/>
       <Button type="submit"  className={classes.button}>{user ? 'Редактировать' : 'Добавить'}</Button>
-      {user && (
-        <Button onClick={handleEditClick} className={classes.button}>Отменить</Button>
-      )}
     </form>
   );
 }
