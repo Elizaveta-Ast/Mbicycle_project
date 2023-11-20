@@ -15,7 +15,7 @@ function User({ user, onDelete, onEdit, onCancelEdit }) {
 
   const handleEditClick = () => {
     // setEditForm(!editForm);
-    navigate("/edit");
+    navigate("/edit", { state: { userId: user.id } });
   };
 
   // const handleSaveEdit = () => {

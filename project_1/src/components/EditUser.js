@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import AddUser from "./AddUser";
 import { connect } from "react-redux";
 import { editUser } from "./actions";
+import { useLocation  } from "react-router";
 
-function EditUser({ user, onEdit }) {
+function EditUser({ onEdit, users }) {
+  
+  const { state } = useLocation();
+
+  const userId = state.userId;
+  const user = users?.find(user => user.id === userId);
+
   const [editedUser, setEditedUser] = useState({ ...user });
 
   const handleSaveEdit = () => {
@@ -27,8 +34,12 @@ function EditUser({ user, onEdit }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  users: state.users,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onEdit: (user) => dispatch(editUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(EditUser);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser);
