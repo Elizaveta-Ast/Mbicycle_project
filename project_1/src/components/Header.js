@@ -26,7 +26,7 @@ function Header() {
   return (
     <AppBar position="static"
     disableGutters sx={{
-      backgroundColor: 'rgb(70, 70, 70)',
+      backgroundColor: 'rgb(105, 105, 105)',
       flexDirection: 'row',
     }}>
       <Container maxWidth="xl">

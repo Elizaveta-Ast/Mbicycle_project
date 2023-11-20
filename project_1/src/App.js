@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mbicycle from "./components/Mbicycle"
 import store from "./components/store";
 import { Provider } from "react-redux";
+import EditUser from "./components/EditUser";
+import JavaPage from "./components/JavaPage";
+import NETPage from "./components/NETPage";
+import FlutterPage from "./components/FlutterPage";
+import ProjectsPage from "./components/ProjectsPage";
 
 function App() {
   return (
@@ -18,24 +23,38 @@ function App() {
             <Route path="/" element={<Mbicycle />} />
 
             {/* Страница добавления пользователя */}
-            <Route
-              path="/add"
-              element={
+            <Route path="/add" element={
                 <aside>
                   <AddUser />
                 </aside>
               }
             />
 
+             {/* Маршрут для отображения формы редактирования */}
+             <Route path="/edit" element={
+                <main>
+                  <EditUser />
+                </main>
+              }
+            />
+
             {/* Страница персонала */}
-            <Route
-              path="/users"
-              element={
+            <Route path="/users" element={
                 <main>
                   <Users />
                 </main>
               }
             />
+
+            {/* Страница для карточек */}
+            <Route path="/java-development" element={ <JavaPage /> } />
+
+            <Route path="/net-development" element={ <NETPage /> } />
+
+            <Route path="/flutter-development" element={ <FlutterPage /> } />
+
+            <Route path="/projects" element={ <ProjectsPage /> } />
+
           </Routes>
         </div>
       </BrowserRouter>

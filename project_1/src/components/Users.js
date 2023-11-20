@@ -2,25 +2,41 @@ import React from 'react'
 import User from './User'
 import { connect } from 'react-redux';
 import { deleteUser, editUser } from './actions';
+import { useState } from 'react';
 
-function Users(props) {
-  if (props.users.length > 0) {
-    return (
-      <div>
-        {props.users.map((el) => (
+function Users(props, onCancelEdit) {
+  const [editingUserId, setEditingUserId] = useState(null);
+
+  const startEditing = (userId) => {
+    setEditingUserId(userId);
+  };
+
+  const cancelEditing = () => {
+    setEditingUserId(null);
+  };
+
+  return (
+    <div>
+      {props.users.length > 0 ? (
+        props.users.map((el) => (
           <div key={el.id}>
-            <User onEdit={props.onEdit} onDelete={props.onDelete} user={el} />
+            <User
+              onEdit={props.onEdit}
+              onDelete={props.onDelete}
+              user={el}
+              startEditing={startEditing}
+              cancelEditing={cancelEditing}
+              isEditing={editingUserId === el.id}
+            />
           </div>
-        ))}
-      </div>
-    )
-  } else {
-    return (
-      <div className="user">
-        <h3>Пользователей нет</h3>
-      </div>
-    )
-  }
+        ))
+      ) : (
+        <div className="user">
+          <h3>Пользователей нет</h3>
+        </div>
+      )}
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({

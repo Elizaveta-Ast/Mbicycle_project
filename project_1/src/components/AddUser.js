@@ -1,20 +1,28 @@
-import React, { useState } from "react";
-import Checkbox from '@mui/material/Checkbox';
-import { FormLabel } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
 import { connect } from 'react-redux';
 import { addUser, editUser } from "./actions";
+import { useNavigate  } from "react-router";
 
 // Функция, которая принимает объекты user, onAdd и onEdit
-function AddUser({ user, onAdd, onEdit }) {
+function AddUser({ user, onAdd, onEdit, onCancelEdit }) { 
+  const navigate = useNavigate();
+  const [showUsers, setShowUsers] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+
   // Создание состояний и функций для их обновления
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
   const [age, setAge] = useState(1);
-  const [isHappy, setIsHappy] = useState(false);
+  const [job, setJob] = useState("");
+  const [bio, setBio] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [quote, setQuote] = useState("");
+
+  
 
   // Функция, вызываемая при отправке формы
   const handleSubmit = (e) => {
@@ -22,9 +30,12 @@ function AddUser({ user, onAdd, onEdit }) {
     const userAdd = {
       firstName: firstName,
       lastName: lastName,
-      bio: bio,
       age: age,
-      isHappy: isHappy,
+      job: job,
+      bio: bio,
+      country: country,
+      city: city,
+      quote: quote,
     };
 
     if (user && user.id) {
@@ -37,47 +48,64 @@ function AddUser({ user, onAdd, onEdit }) {
     // Очистка полей после добавления/редактирования пользователя
     setFirstName("");
     setLastName("");
-    setBio("");
     setAge(1);
-    setIsHappy(false);
+    setJob("");
+    setBio("");
+    setCountry("");
+    setCity("");
+    setQuote("");
+    navigate("/users");
+
+    setShowUsers(true);
+  };
+
+  const [editForm, setEditForm] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(false);
+    setEditForm(false);
   };
 
   // Стили MUI компонентов
   const useStyles = makeStyles({
     button: {
-      background: 'linear-gradient(rgba(139, 139, 108, 0.697), rgba(139, 139, 108, 0.697), rgba(164, 164, 135, 0.697))',
+      background: 'rgb(200, 200, 200)',
       border: 0,
+      width: "90%",
       borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(139, 139, 108, 0.697)',
+      boxShadow: 'rgb(160, 160, 160)',
       height: 48,
       padding: '0 30px',
       color: "black",
     },
     label: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      marginBottom: '30px',
+      fontSize: "24px",
+      fontWeight: "bold",
+      marginBottom: "10px",
       textAlign: "center",
-      color:"rgb(70, 70, 70)",
+      color: "rgb(70, 70, 70)",
     },
     input: {
-      width: '100%',
+      width: "90%",
       border: 0,
-      color: 'black',
-      outline: 'none',
-      height: '80px',
-    },
-    labelCheck: {
-      margin: '15px',
-      width: '20ch',
+      color: "black",
+      outline: "none",
+      height: "80px",
     },
     form:{
+      width: "30%",
       border: 1,
       borderRadius: 10,
+      background: "rgba(230, 230, 230)",
       boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.1)',
       padding: '20px',
-      margin: '10px',
+      marginTop: "30px",
+      margin: 'auto',
       color: "black",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
   });
 
@@ -85,14 +113,19 @@ function AddUser({ user, onAdd, onEdit }) {
 
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
-      <div className={classes.label}>{user ? '' : 'Добавление пользователя'}</div>
-      <TextField className={classes.input} label="Имя" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-      <TextField className={classes.input} label="Фамилия" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-      <TextField className={classes.input} label="БИО" value={bio} onChange={(e) => setBio(e.target.value)} />
-      <TextField className={classes.input} label="Возраст" value={age} onChange={(e) => setAge(e.target.value)}/>
-      <FormLabel className={classes.labelCheck} htmlFor="isHappy">Счастлив?</FormLabel>
-      <Checkbox type="checkbox" id="isHappy" checked={isHappy} onChange={(e) => setIsHappy(e.target.checked)}/>
+      <div className={classes.label}>{user ? 'Редактирование пользователя' : 'Добавление пользователя' }</div>
+      <TextField className={classes.input} variant="standard" label="Имя" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="Фамилия" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="Возраст" value={age} onChange={(e) => setAge(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="Должность" value={job} onChange={(e) => setJob(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="БИО" value={bio} onChange={(e) => setBio(e.target.value)} />
+      <TextField className={classes.input} variant="standard" label="Старана" value={country} onChange={(e) => setCountry(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="Город" value={city} onChange={(e) => setCity(e.target.value)}/>
+      <TextField className={classes.input} variant="standard" label="Цитата" value={quote} onChange={(e) => setQuote(e.target.value)}/>
       <Button type="submit"  className={classes.button}>{user ? 'Редактировать' : 'Добавить'}</Button>
+      {user && (
+        <Button onClick={handleEditClick} className={classes.button}>Отменить</Button>
+      )}
     </form>
   );
 }
