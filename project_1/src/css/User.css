@@ -1,0 +1,65 @@
+.user-container {
+  background-color: rgba(238, 238, 238, 0.945);
+  color: rgb(41, 41, 41);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 20px auto;
+  border: 10px solid #ccc;
+  padding: 20px;
+  position: relative;
+}
+
+.user-image {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.user-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.user-details {
+  flex: 2;
+  font-size: 18px;
+}
+
+.user-actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.delete-icon,
+.edit-icon {
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 25px;
+  color: rgb(108, 108, 108);
+  transform: scale(1);
+}
+
+
+.edit-icon{
+  margin-right: 5px;
+}
+
+ .delete-icon:hover,
+ .edit-icon:hover{
+  opacity: 0.5;
+} 
+
+/* Дополнительные стили для центрирования и сдвига текста */
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+h3,
+p,
+b {
+  margin: 0;
+}

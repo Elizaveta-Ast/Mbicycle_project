@@ -1,90 +1,130 @@
-import React, { useState } from "react";
-import Checkbox from '@mui/material/Checkbox';
-import { FormLabel } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
-import FormControl from '@mui/material/FormControl';
+import { connect } from 'react-redux';
+import { addUser, editUser } from "./actions";
+import { useNavigate  } from "react-router";
 
-//функция которая принимает объекты user, onAdd
-function AddUser({ user, onAdd }) {
-    //создание состояния с именем ... и функцией set... для его обновления
-  const [firstName, setFirstName] = useState(""); 
-  const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
-  const [age, setAge] = useState(1);
-  const [isHappy, setIsHappy] = useState(false);
+function AddUser({ user, onAdd, onEdit }) {
+  const navigate = useNavigate();
+  const [showUsers, setShowUsers] = useState(true);
 
-/* Объявляется функция handleSubmit, 
-которая будет вызываться при отправке формы. 
-Она принимает объект события e в качестве аргумента.*/
-  const handleSubmit = (e) => {
-    e.preventDefault(); //предотвращение перегрузки страницы
+  useEffect(() => {
+    if (user) {
+      setFormData({ ...user });
+    }
+  }, [user]);
 
-    //объект, который хранит значения из состояний ...
-    const userAdd = {
-      first_name: firstName,
-      last_name: lastName,
-      bio: bio,
-      age: age,
-      isHappy: isHappy,
-    };
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    age: 1,
+    job: "",
+    bio: "",
+    country: "",
+    city: "",
+    quote: "",
+  });
 
-    if (user) userAdd.id = user.id;
-
-    onAdd(userAdd);
-
-    setFirstName("");
-    setLastName("");
-    setBio("");
-    setAge(1);
-    setIsHappy(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userAdd = { ...formData };
+
+    if (user && user.id) {
+      userAdd.id = user.id;
+      onEdit(userAdd);
+    } else {
+      onAdd(userAdd);
+    }
+
+    setFormData({
+      firstName: "",
+      lastName: "",
+      age: 1,
+      job: "",
+      bio: "",
+      country: "",
+      city: "",
+      quote: "",
+    });
+
+    navigate("/users");
+  };
+
+  // Стили MUI компонентов
   const useStyles = makeStyles({
-    root: {
-      background: 'linear-gradient(rgba(107, 163, 1, 0.566), rgba(128, 197, 0, 0.566), rgba(128, 197, 0, 0.566))',
+    button: {
+      background: 'rgb(200, 200, 200)',
       border: 0,
+      width: "90%",
       borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(107, 163, 1, 0.566)',
+      boxShadow: 'rgb(160, 160, 160)',
       height: 48,
       padding: '0 30px',
+      color: "black",
     },
-  });
-
-  const inputStyles = makeStyles({
-    root: {
-      width: '100%',
+    label: {
+      fontSize: "24px",
+      fontWeight: "bold",
+      marginBottom: "10px",
+      textAlign: "center",
+      color: "rgb(70, 70, 70)",
+    },
+    input: {
+      width: "90%",
       border: 0,
-      color: 'black',
-      outline: 'none',
-      height: '80px',
-      color: 'rgba(128, 197, 0, 0.566)',
+      color: "black",
+      outline: "none",
+      height: "80px",
+    },
+    form:{
+      width: "30%",
+      border: 1,
+      borderRadius: 10,
+      background: "rgba(230, 230, 230)",
+      boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.1)',
+      padding: '20px',
+      marginTop: "30px",
+      margin: 'auto',
+      color: "black",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
   });
 
-  const labelStyles = makeStyles({
-    root: {
-      margin: '15px',
-      width: '20ch',
-    },
-  });
-
-  const classesButton = useStyles();
-  const classesInput = inputStyles();
-  const classesLabel = labelStyles();
+  const classes = useStyles();
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField className={classesInput.root} label="Имя" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-      <TextField className={classesInput.root} label="Фамилия" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-      <TextField className={classesInput.root} label="БИО" value={bio} onChange={(e) => setBio(e.target.value)} />
-      <TextField className={classesInput.root} label="Возраст" value={age} onChange={(e) => setAge(e.target.value)}/>
-      <FormLabel className={classesLabel.root} htmlFor="isHappy">Счастлив?</FormLabel>
-      <Checkbox type="checkbox" id="isHappy" checked={isHappy} onChange={(e) => setIsHappy(e.target.checked)}/>
-      <Button type="submit"  className={classesButton.root}>Добавить</Button>
+    <form onSubmit={handleSubmit} className={classes.form}>
+      <div className={classes.label}>{user ? 'Редактирование пользователя' : 'Добавление пользователя' }</div>
+      <TextField className={classes.input} variant="standard" label="Имя" name="firstName" value={formData.firstName} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Фамилия" name="lastName" value={formData.lastName} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Возраст" name="age" value={formData.age} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Должность" name="job" value={formData.job} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="БИО" name="bio" value={formData.bio} onChange={handleChange} />
+      <TextField className={classes.input} variant="standard" label="Страна" name="country" value={formData.country} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Город" name="city" value={formData.city} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="Цитата" name="quote" value={formData.quote} onChange={handleChange}/>
+      <Button type="submit"  className={classes.button}>{user ? 'Редактировать' : 'Добавить'}</Button>
     </form>
   );
 }
 
-export default AddUser;
+// Функция для связи компонента с Redux store
+const mapDispatchToProps = (dispatch) => ({
+  onAdd: (user) => dispatch(addUser(user)),
+  onEdit: (user) => dispatch(editUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(AddUser);

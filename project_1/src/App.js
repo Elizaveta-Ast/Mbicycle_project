@@ -2,60 +2,64 @@ import React, {useState} from "react"
 import Header from "./components/Header"
 import Users from "./components/Users"
 import AddUser from "./components/AddUser"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Mbicycle from "./components/Mbicycle"
+import store from "./components/store";
+import { Provider } from "react-redux";
+import EditUser from "./components/EditUser";
+import JavaPage from "./components/JavaPage";
+import NETPage from "./components/NETPage";
+import FlutterPage from "./components/FlutterPage";
+import ProjectsPage from "./components/ProjectsPage";
 
-function App(){
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      firstname: "Михаил",
-      lastname: "Александрович",
-      bio: "Энергетик",
-      age: 54,
-      isHappy: false
-    },
-    {
-      id: 2,
-      firstname: "Александр",
-      lastname: "Иванов",
-      bio: "Техник-программист",
-      age: 23,
-      isHappy: true
-    },
-    {
-      id: 3,
-      firstname: "Анна",
-      lastname: "Будько",
-      bio: "Преподаватель",
-      age: 23,
-      isHappy: true
-    }
-  ])
-
-  const editUser = (user) => {
-    setUsers(prevUsers => prevUsers.map(prevUser => prevUser.id === user.id ? user : prevUser))
-  }
-  
-  const deleteUser = (id) => {
-    setUsers(prevUsers => prevUsers.filter(prevUser => prevUser.id !== id))
-  }
-
-  const addUser = (user) => {
-    const id = users.length + 1
-    setUsers(prevUsers => [...prevUsers, { id, ...user }])
-  }
-
+function App() {
   return (
-    <div>
-      <Header title="Список пользователей">
-      </Header>
-      <main>
-        <Users onEdit={editUser} users={users} onDelete={deleteUser} />
-      </main>
-      <aside>
-        <AddUser onAdd={addUser} />
-      </aside>
-    </div>
-  ) 
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Routes>
+            {/* Главная страница */}
+            <Route path="/" element={<Mbicycle />} />
+
+            {/* Страница добавления пользователя */}
+            <Route path="/add" element={
+                <aside>
+                  <AddUser />
+                </aside>
+              }
+            />
+
+             {/* Маршрут для отображения формы редактирования */}
+             <Route path="/edit" element={
+                <main>
+                  <EditUser />
+                </main>
+              }
+            />
+
+            {/* Страница персонала */}
+            <Route path="/users" element={
+                <main>
+                  <Users />
+                </main>
+              }
+            />
+
+            {/* Страница для карточек */}
+            <Route path="/java-development" element={ <JavaPage /> } />
+
+            <Route path="/net-development" element={ <NETPage /> } />
+
+            <Route path="/flutter-development" element={ <FlutterPage /> } />
+
+            <Route path="/projects" element={ <ProjectsPage /> } />
+
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
