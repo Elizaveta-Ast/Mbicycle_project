@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,700;1,400;1,600&family=Caveat&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Cormorant+Infant:ital,wght@0,300;0,600;1,300;1,600&family=Jost:wght@200;400;600&family=Jura:wght@300&family=Raleway:ital,wght@0,300;0,600;1,300;1,600&family=Sometype+Mono:wght@400;600&family=Ysabeau+Infant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,700;1,400;1,600&family=Caveat&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Cormorant+Infant:ital,wght@0,300;0,600;1,300;1,600&family=Jost:wght@200;400;600&family=Jura:wght@300&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,600;1,6..12,300;1,6..12,600&family=Raleway:ital,wght@0,300;0,600;1,300;1,600&family=Roboto+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Rubik:ital,wght@0,400;0,600;1,400;1,600&family=Sometype+Mono:wght@400;600&family=Ysabeau+Infant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
 
 *{
     margin: 0;
@@ -14,7 +14,10 @@ body{
     font-family: 'Cormorant Infant', serif;
     font-family: 'Jost', sans-serif;
     font-family: 'Jura', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
     font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+    font-family: 'Rubik', sans-serif;
     font-family: 'Sometype Mono', monospace;
     font-family: 'Ysabeau Infant', sans-serif;
     font-weight: 400;
@@ -28,23 +31,6 @@ body{
 .secondaryText{
     font-size: 20px;
 }
-/* form{
-    margin-top: 100px;
-}
-
-form input:not([type="checkbox"]), form textarea, form button{
-    padding: 15px 5%;
-    font-family: 'Sometype Mono', monospace;
-    font-weight: 300;
-    background:rgba(186, 186, 151, 0.697);
-    color: black;
-    outline: none;
-}
-
-form input[type="checkbox"] {
-    margin: 10px;
-    background-color: rgb(70, 70, 70);
-}*/
 
 form button {
     width: 100%;

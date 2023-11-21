@@ -3,6 +3,8 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router";
+import { Button } from "@mui/material";
 
 const theme = createTheme();
 
@@ -77,6 +79,12 @@ const NETPage = () => {
     },
   ];
 
+  const navigate = useNavigate();
+
+  const openJavaUser = () => {
+    navigate("/net-users");
+  };
+
   return (
     <ThemeProvider theme={theme}>
         <div style={{ padding: "20px", textAlign: "center", backgroundSize: "cover", marginTop: "40px" }}>
@@ -148,6 +156,11 @@ const NETPage = () => {
             ))}
           </Grid>
         </Container>
+        <Button style={{margin: "30px 0", 
+          fontSize: "18px", 
+          color: "black", 
+          backgroundColor: "#b4b4b4" }}
+          onClick={openJavaUser}>Перейти к специалистам</Button>
       </div>
     </ThemeProvider>
   );

@@ -3,11 +3,16 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 
 const theme = createTheme();
 
-const JavaPage = () => {
-    const adgeJava = [
+const JavaPage = (user) => {
+  const navigate = useNavigate();
+  
+
+  const adgeJava = [
         {
           title: "Объектно-ориентированный",
           text: "Java полностью поддерживает объектно-ориентированное программирование (ООП), что подразумевает, что разработчики не только определяют тип данных и их структуру, но и набор применяемых к ним функций. Помимо ООП, Java также совместима с лямбда-выражениями и анонимными функциями. Команда Mbicycle использует ООП, чтобы облегчить разработку и сделать программное обеспечение гибким и расширяемым.",
@@ -24,7 +29,7 @@ const JavaPage = () => {
           title: "Экономическая эффективность",
           text: "Использование Java с самого начала бесплатно, поэтому не требуется никаких платежей со стороны компании или независимых разработчиков для создания приложений Java. Эта политика бесплатного использования также способствует росту сообщества Java и широкому распространению Java среди предприятий. Благодаря этому специалисты Mbicycle могут предложить справедливую цену за наши услуги по разработке приложений Java.",
         },
-      ];
+  ];
 
   const toolsJava = [
     {
@@ -77,6 +82,10 @@ const JavaPage = () => {
     },
   ];
 
+  const openJavaUser = () => {
+    navigate("/java-users");
+  };
+
   return (
     <ThemeProvider theme={theme}>
         <Container maxWidth="xl" style={{padding: "20px" }}>
@@ -121,7 +130,7 @@ const JavaPage = () => {
             <h1 style={{color: "black", marginBottom: "5px", marginTop: "20px" }}>Доступные консультанты по Java 24/7</h1>
             <p style={{color: "black", marginBottom: "5px", fontSize: "22px"}}>В Mbicycle имеется полноценный отдел квалифицированных консультантов, помогающих нашим клиентам подготовиться к реализации проектов по разработке приложений.</p>
             <p style={{color: "black", marginBottom: "5px", fontSize: "22px"}}>От идеи проекта до его реализации и технической поддержки наши консультанты остаются на связи с клиентом на каждом этапе всего цикла разработки, чтобы минимизировать количество возможных препятствий при внедрении своего программного обеспечения.</p>
-        </Container>
+      </Container>
       <div style={{ padding: "20px", textAlign: "center", backgroundSize: "cover" }}>
         <Container maxWidth="xl">
         <h1 style={{color: "black", marginBottom: "20px", textAlign: "left"}}>Наш набор инструментов Java</h1>
@@ -153,6 +162,11 @@ const JavaPage = () => {
             ))}
           </Grid>
         </Container>
+        <Button style={{margin: "30px 0", 
+          fontSize: "18px", 
+          color: "black", 
+          backgroundColor: "#b4b4b4" }}
+          onClick={openJavaUser}>Перейти к специалистам</Button>
       </div>
     </ThemeProvider>
   );

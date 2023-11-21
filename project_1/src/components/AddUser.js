@@ -3,8 +3,8 @@ import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
 import { connect } from 'react-redux';
-import { addUser, editUser } from "./actions";
 import { useNavigate  } from "react-router";
+import { addUser, editUser } from "./actions";
 
 function AddUser({ user, onAdd, onEdit }) {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ function AddUser({ user, onAdd, onEdit }) {
   }, [user]);
 
   const [formData, setFormData] = useState({
+    photo: "",
     firstName: "",
     lastName: "",
     age: 1,
@@ -47,6 +48,7 @@ function AddUser({ user, onAdd, onEdit }) {
     }
 
     setFormData({
+      photo: "",
       firstName: "",
       lastName: "",
       age: 1,
@@ -116,6 +118,7 @@ function AddUser({ user, onAdd, onEdit }) {
       <TextField className={classes.input} variant="standard" label="Страна" name="country" value={formData.country} onChange={handleChange}/>
       <TextField className={classes.input} variant="standard" label="Город" name="city" value={formData.city} onChange={handleChange}/>
       <TextField className={classes.input} variant="standard" label="Цитата" name="quote" value={formData.quote} onChange={handleChange}/>
+      <TextField className={classes.input} variant="standard" label="URL фотографии" name="photo" value={formData.photo} onChange={handleChange}/>
       <Button type="submit"  className={classes.button}>{user ? 'Редактировать' : 'Добавить'}</Button>
     </form>
   );

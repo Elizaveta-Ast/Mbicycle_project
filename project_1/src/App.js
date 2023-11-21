@@ -11,6 +11,9 @@ import JavaPage from "./components/JavaPage";
 import NETPage from "./components/NETPage";
 import FlutterPage from "./components/FlutterPage";
 import ProjectsPage from "./components/ProjectsPage";
+import JavaUsers from "./components/JavaUsers";
+import NETUsers from "./components/NETUsers";
+import FlutterUsers from "./components/FlutterUsers";
 
 function App() {
   return (
@@ -46,7 +49,7 @@ function App() {
               }
             />
 
-            {/* Страница для карточек */}
+            {/* Страницы для карточек */}
             <Route path="/java-development" element={ <JavaPage /> } />
 
             <Route path="/net-development" element={ <NETPage /> } />
@@ -54,6 +57,14 @@ function App() {
             <Route path="/flutter-development" element={ <FlutterPage /> } />
 
             <Route path="/projects" element={ <ProjectsPage /> } />
+
+            {/* Страницы для персонала */}
+            
+            <Route path="/java-users" element={ <JavaUsers /> } />
+
+            <Route path="/net-users" element={ <NETUsers /> } />
+
+            <Route path="/flutter-users" element={ <FlutterUsers /> } />
 
           </Routes>
         </div>
