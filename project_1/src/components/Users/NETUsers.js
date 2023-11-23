@@ -1,7 +1,7 @@
 import React from 'react';
 import User from './User';
 import { connect } from 'react-redux';
-import { deleteUser } from "./actions";
+import { deleteUser } from "../Redux/actions";
 
 
 function NETUsers(props) {

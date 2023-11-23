@@ -5,12 +5,14 @@ import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const theme = createTheme();
 
 const JavaPage = (user) => {
   const navigate = useNavigate();
-  
+  const matchesMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesDesktop = useMediaQuery(theme.breakpoints.down("md"));
 
   const adgeJava = [
         {
@@ -93,13 +95,13 @@ const JavaPage = (user) => {
             <p style={{color: "black", marginBottom: "5px", fontSize: "22px"}}>Mbicycle имеет обширный опыт поставки надежных Java-приложений в срок и в рамках бюджета. На сегодняшний день мы помогли спортивным и студенческим клубам, инженерным и страховым компаниям, предприятиям нефтедобывающей отрасли и другим клиентам запустить их программное обеспечение на базе Java.</p>
             <p style={{color: "black", marginBottom: "5px", fontSize: "22px"}}>Имея многолетний опыт разработки мобильного и веб-программного обеспечения, Mbicycle предлагает ряд услуг по разработке программного обеспечения на Java.</p>
         </Container>
-        <div style={{ padding: "20px", textAlign: "center", backgroundSize: "cover" }}>
+        <div style={{ padding: matchesMobile ? "5px" : "20px", textAlign: "center", backgroundSize: "cover" }}>
         <Container maxWidth="xl">
         <h1 style={{color: "black", marginBottom: "5px", textAlign: "left"}}>Ключевые преимущества разработки на Java</h1>
-        <p style={{color: "black", marginBottom: "20px", textAlign: "left", fontSize: "22px"}}>Если вы все еще ищете наиболее подходящую платформу для оцифровки своих услуг или операций, вот наш взгляд на ключевые преимущества Java как платформы для разработки приложений.</p>
+        <p style={{color: "black", marginBottom: matchesMobile ? "5px" : "20px", textAlign: "left", fontSize: "22px"}}>Если вы все еще ищете наиболее подходящую платформу для оцифровки своих услуг или операций, вот наш взгляд на ключевые преимущества Java как платформы для разработки приложений.</p>
           <Grid container spacing={3}>
             {adgeJava.map((adge, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item sm={matchesDesktop ? 6 : 3} key={index}>
                 <Paper
                   sx={{
                     margin: "0px",
@@ -110,7 +112,7 @@ const JavaPage = (user) => {
                     borderCollapse: "collapse",
                     borderBottom: "2px solid #000",
                     "&:hover": {
-                        height: "103%",
+                        height: matchesMobile ? "100%" : "103%",
                     } 
                   }}
                 >
@@ -136,7 +138,7 @@ const JavaPage = (user) => {
         <h1 style={{color: "black", marginBottom: "20px", textAlign: "left"}}>Наш набор инструментов Java</h1>
           <Grid container spacing={0.3}>
             {toolsJava.map((tool, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item sm={matchesDesktop ? 6 : 3} key={index}>
                 <Paper
                   sx={{
                     margin: "0px",
@@ -147,7 +149,7 @@ const JavaPage = (user) => {
                     borderCollapse: "collapse",
                     borderBottom: "2px solid #000",
                     "&:hover": {
-                        height: "103%",
+                        height: matchesMobile ? "100%" : "103%",
                     } 
                   }}
                 >

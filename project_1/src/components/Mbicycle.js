@@ -5,10 +5,11 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const theme = createTheme();
 
-const Mbicycle = (url) => {
+const Mbicycle = () => {
 
   const rectanglesData = [
     {
@@ -50,6 +51,9 @@ const Mbicycle = (url) => {
   ];
 
   const navigate = useNavigate();
+  const matchesMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesDesktop = useMediaQuery(theme.breakpoints.down("md"));
+
 
   const openWebsite = (url) => {
     window.open(url, "_blank");
@@ -60,62 +64,87 @@ const Mbicycle = (url) => {
   };
 
   return (
-    
-      <ThemeProvider theme={theme}>
-        <div style={{backgroundSize: "cover", background:"url('https://img.freepik.com/free-photo/diverse-businesspeople-having-a-meeting_53876-103954.jpg?w=1380&t=st=1700042427~exp=1700043027~hmac=caaf1866ffe310c695e46d5e7f2fbf6c2797d90a127d55945cec6e7e32529c96')0 0/cover no-repeat"}}>
-          <Container maxWidth="xl" >
-            <Grid container >
-              <Grid item xs={5} >
+    <ThemeProvider theme={theme}>
+    <div
+      style={{
+        backgroundSize: "cover",
+        background:
+          "url('https://img.freepik.com/free-photo/diverse-businesspeople-having-a-meeting_53876-103954.jpg?w=1380&t=st=1700042427~exp=1700043027~hmac=caaf1866ffe310c695e46d5e7f2fbf6c2797d90a127d55945cec6e7e32529c96') 0 0/cover no-repeat",
+      }}
+    >
+      <Container maxWidth="xl">
+        <Grid container>
+          <Grid item xs={12} sm={5}>
+            <div
+              style={{
+                padding: "50px 0px",
+                marginTop: matchesMobile ? "50px" : "150px",
+                marginBottom: matchesMobile ? "50px" : "150px",
+              }}
+              elevation={3}
+              sx={{
+                textAlign: "left",
+              }}
+            >
+              <Typography variant="h4" gutterBottom className="mainText">
+                Специалисты Mbicycle
+              </Typography>
+              <Typography variant="body1" className="secondaryText">
+                Энтузиасты аутсорсинга разработки программного обеспечения,
+                усердно работающие над созданием мощных программных решений.
+              </Typography>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+    </div>
+    <div
+      style={{
+        padding: "20px",
+        textAlign: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <Container maxWidth="xl">
+        <Grid container spacing={3}>
+          {rectanglesData.map((rectangle, index) => (
+            <Grid item xs={12} sm={matchesDesktop ? 6 : 4} key={index}>
+              <Paper
+                elevation={3}
+                sx={{
+                  textAlign: "left",
+                  background: "rgba(255, 255, 255, 0.800)",
+                  height: "100%",
+                  cursor: "pointer",
+                  "&:hover": {
+                    width: matchesMobile ? "100%" : "102%",
+                    height: matchesMobile ? "100%" : "102%",
+                  },
+                }}
+                onClick={() => navigation(rectangle.navigate) && openWebsite(rectangle.webSite)}
+              >
                 <div
-                style={{ padding: "50px 0px", marginTop: "150px", marginBottom: "150px" }}
-                  elevation={3}
-                  sx={{ 
-                    textAlign: "left",
+                  style={{
+                    backgroundImage: rectangle.image,
+                    backgroundSize: "cover",
+                    height: matchesMobile ? "200px" : "150px",
+                    marginBottom: "15px",
                   }}
-                >
-                  <h1 component="h1" gutterBottom className="mainText">
-                    Специалисты Mbicycle
-                  </h1>
-                  <p className="secondaryText" >
-                    Энтузиасты аутсорсинга разработки программного обеспечения, 
-                    усердно работающие над созданием мощных программных решений. 
-                  </p>  
+                />
+                <div style={{ padding: "0 15px 15px 15px" }}>
+                  <Typography variant="h5">{rectangle.title}</Typography>
+                  <Typography variant="body1" paragraph style={{ fontSize: "18px" }}>
+                    {rectangle.text}
+                  </Typography>
                 </div>
-              </Grid>
+              </Paper>
             </Grid>
-          </Container>
-        </div>
-        <div style={{ padding: "20px", textAlign: "center", backgroundSize: "cover" }}>
-          <Container maxWidth="xl">
-            <Grid container spacing={3}>
-              {rectanglesData.map((rectangle, index) => (
-                <Grid item xs={4} key={index}>
-                  <Paper elevation={3} sx={{ 
-                    textAlign: "left", 
-                    background: "rgb(255, 255, 255, 0.800)",  
-                    height: "100%", cursor: "pointer",
-                    "&:hover": {
-                      width: "102%",
-                      height: "102%",
-                    } }}
-                    onClick={() => navigation(rectangle.navigate) && openWebsite(rectangle.webSite)}>
-                    <div style={{ backgroundImage: rectangle.image, backgroundSize: "cover", height: "150px", marginBottom: "15px"}} />
-                    <div style={{padding: "0 15px 15px 15px"}}>
-                      <h1 variant="h5" >
-                        {rectangle.title}
-                      </h1>
-                      <p variant="body1" paragraph style={{fontSize: "18px"}}>
-                        {rectangle.text}
-                      </p>
-                    </div>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-      </div>
-    </ThemeProvider>
-  );
+          ))}
+        </Grid>
+      </Container>
+    </div>
+  </ThemeProvider>
+);
 };
 
 export default Mbicycle;

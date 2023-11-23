@@ -1,7 +1,8 @@
 import React from 'react'
 import User from './User'
 import { connect } from 'react-redux';
-import { deleteUser, editUser } from './actions';
+import { deleteUser, editUser } from '../Redux/actions';
+
 
 function Users(props) {
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import User from './User';
 import { connect } from 'react-redux';
-import { deleteUser } from "./actions";
+import { deleteUser } from "../Redux/actions";
 
-function JavaUsers(props) {
-  const javaDevelopers = props.users.filter(user => user.job === "Java developer");
+
+function FlutterUsers(props) {
+  const javaDevelopers = props.users.filter(user => user.job === "Flutter developer");
 
   return (
     <div>
@@ -27,7 +28,7 @@ function JavaUsers(props) {
           <h3 style={{
             fontSize: "26px", 
             color: "black", 
-            textAlign: "center" }}>Нет пользователей с должностью Java developer</h3>
+            textAlign: "center" }}>Нет пользователей с должностью Flutter developer</h3>
         </div>
       )}
     </div>
@@ -42,4 +43,4 @@ const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => dispatch(deleteUser(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JavaUsers);
+export default connect(mapStateToProps, mapDispatchToProps)(FlutterUsers);

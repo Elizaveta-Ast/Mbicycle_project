@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddUser from "./AddUser";
 import { connect } from "react-redux";
-import { editUser } from "./actions";
+import { editUser } from "../Redux/actions";
 import { useLocation  } from "react-router";
 
 function EditUser({ onEdit, users }) {

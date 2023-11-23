@@ -1,19 +1,19 @@
 import React, {useState} from "react"
 import Header from "./components/Header"
-import Users from "./components/Users"
-import AddUser from "./components/AddUser"
+import Users from "./components/Users/Users"
+import AddUser from "./components/Forms/AddUser"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mbicycle from "./components/Mbicycle"
-import store from "./components/store";
+import store from "./components/Redux/store";
 import { Provider } from "react-redux";
-import EditUser from "./components/EditUser";
-import JavaPage from "./components/JavaPage";
-import NETPage from "./components/NETPage";
-import FlutterPage from "./components/FlutterPage";
-import ProjectsPage from "./components/ProjectsPage";
-import JavaUsers from "./components/JavaUsers";
-import NETUsers from "./components/NETUsers";
-import FlutterUsers from "./components/FlutterUsers";
+import EditUser from "./components/Forms/EditUser";
+import JavaPage from "./components/Cards/JavaPage"
+import NETPage from "./components/Cards/NETPage";
+import FlutterPage from "./components/Cards/FlutterPage";
+import ProjectsPage from "./components/Cards/ProjectsPage";
+import JavaUsers from "./components/Users/JavaUsers";
+import NETUsers from "./components/Users/NETUsers";
+import FlutterUsers from "./components/Users/FlutterUsers";
 
 function App() {
   return (

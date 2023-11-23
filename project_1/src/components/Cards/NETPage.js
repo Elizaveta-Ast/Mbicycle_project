@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const theme = createTheme();
 
@@ -80,6 +81,8 @@ const NETPage = () => {
   ];
 
   const navigate = useNavigate();
+  const matchesMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesDesktop = useMediaQuery(theme.breakpoints.down("md"));
 
   const openJavaUser = () => {
     navigate("/net-users");
@@ -93,7 +96,7 @@ const NETPage = () => {
         <p style={{color: "black", marginBottom: "20px", textAlign: "left", fontSize: "22px"}}>Эксперты .NET из Mbicycle следят за последними тенденциями в области инструментов и технологий разработки Microsoft. Мы по-прежнему сосредоточены на поставке специализированных .NET-приложений для различных отраслей бизнеса. Когда дело доходит до создания многокомпонентных веб-приложений, облачных решений на базе Azure, кроссплатформенных приложений, созданных с помощью Xamarin, и многого другого, наша компания по разработке ASP.NET предлагает широкий спектр надежных услуг по разработке программного обеспечения для плавной и эффективной реализации ваших требования проекта.</p>
           <Grid container spacing={3}>
             {constalting.map((constalting, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item sm={matchesDesktop ? 6 : 3} key={index}>
                 <Paper
                   sx={{
                     margin: "0px",
@@ -104,7 +107,7 @@ const NETPage = () => {
                     borderCollapse: "collapse",
                     borderBottom: "2px solid #000",
                     "&:hover": {
-                        height: "103%",
+                        height: matchesMobile ? "100%" : "103%",
                     } 
                   }}
                 >
@@ -130,7 +133,7 @@ const NETPage = () => {
         <h1 style={{color: "black", marginBottom: "20px", textAlign: "left"}}>Наш набор инструментов .NET</h1>
           <Grid container spacing={0.3}>
             {tools.map((tool, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item sm={matchesDesktop ? 6 : 3} key={index}>
                 <Paper
                   sx={{
                     margin: "0px",
@@ -141,7 +144,7 @@ const NETPage = () => {
                     borderCollapse: "collapse",
                     borderBottom: "2px solid #000",
                     "&:hover": {
-                        height: "103%",
+                        height: matchesMobile ? "100%" : "103%",
                     } 
                   }}
                 >

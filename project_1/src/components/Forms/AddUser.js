@@ -4,11 +4,10 @@ import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
 import { connect } from 'react-redux';
 import { useNavigate  } from "react-router";
-import { addUser, editUser } from "./actions";
+import { addUser, editUser } from "../Redux/actions";
 
 function AddUser({ user, onAdd, onEdit }) {
   const navigate = useNavigate();
-  const [showUsers, setShowUsers] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -28,42 +27,98 @@ function AddUser({ user, onAdd, onEdit }) {
     quote: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+
+    // Очищаем ошибку при изменении значения поля
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (formData.age < 0 ) {
+      newErrors.age = "Возраст должен быть больше нуля";
+    }  
+    
+    const maxCharLimit = 100; 
+    let isAnyFieldEmpty = false; 
+
+    Object.keys(formData).forEach((key) => {
+      const value = formData[key].toString().trim();
+      if (value.length > maxCharLimit) {
+        newErrors[key] = `Превышен лимит символов (${maxCharLimit})`;
+      } else if (value.length === 0){
+        isAnyFieldEmpty = true; 
+      }
+    });
+
+    if (isAnyFieldEmpty) {
+      newErrors['global'] = 'Заполните все поля';
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userAdd = { ...formData };
 
-    if (user && user.id) {
-      userAdd.id = user.id;
-      onEdit(userAdd);
-    } else {
-      onAdd(userAdd);
+    if (validateForm()) {
+      const userAdd = { ...formData };
+
+      if (user && user.id) {
+        userAdd.id = user.id;
+        onEdit(userAdd);
+      } else {
+        onAdd(userAdd);
+      }
+
+      setFormData({
+        photo: "",
+        firstName: "",
+        lastName: "",
+        age: 1,
+        job: "",
+        bio: "",
+        country: "",
+        city: "",
+        quote: "",
+      });
+
+      navigate("/users");
     }
-
-    setFormData({
-      photo: "",
-      firstName: "",
-      lastName: "",
-      age: 1,
-      job: "",
-      bio: "",
-      country: "",
-      city: "",
-      quote: "",
-    });
-
-    navigate("/users");
-  };
+  };  
 
   // Стили MUI компонентов
   const useStyles = makeStyles({
+    "@media (max-width: 600px)": {
+      form: {
+        width: "100%",
+        height: "30%"
+      },
+      input: {
+        width: "100%", 
+      },
+      button: {
+        width: "100%",
+      },
+    },
+    "@media (min-width: 601px)": {
+      form: {
+        width: "100%", 
+      },
+    },
     button: {
       background: 'rgb(200, 200, 200)',
       border: 0,
@@ -110,9 +165,17 @@ function AddUser({ user, onAdd, onEdit }) {
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
       <div className={classes.label}>{user ? 'Редактирование пользователя' : 'Добавление пользователя' }</div>
+
+      {errors.global && <div style={{ color: "red" }}>{errors.global}</div>}
+      {Object.keys(formData).map((key) => (
+        errors[key] && key !== 'global' && <div key={key} style={{ color: "red" }}>{errors[key]}</div>
+      ))}
+
       <TextField className={classes.input} variant="standard" label="Имя" name="firstName" value={formData.firstName} onChange={handleChange}/>
       <TextField className={classes.input} variant="standard" label="Фамилия" name="lastName" value={formData.lastName} onChange={handleChange}/>
-      <TextField className={classes.input} variant="standard" label="Возраст" name="age" value={formData.age} onChange={handleChange}/>
+
+      <TextField className={classes.input} variant="standard" label="Возраст" name="age" value={formData.age} onChange={handleChange} />
+
       <TextField className={classes.input} variant="standard" label="Должность" name="job" value={formData.job} onChange={handleChange}/>
       <TextField className={classes.input} variant="standard" label="БИО" name="bio" value={formData.bio} onChange={handleChange} />
       <TextField className={classes.input} variant="standard" label="Страна" name="country" value={formData.country} onChange={handleChange}/>

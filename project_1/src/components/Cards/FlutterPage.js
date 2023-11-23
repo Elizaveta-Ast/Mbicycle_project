@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const theme = createTheme();
 
@@ -60,6 +61,8 @@ const FlutterPage = () => {
   ];
 
   const navigate = useNavigate();
+  const matchesMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesDesktop = useMediaQuery(theme.breakpoints.down("md"));
 
   const openJavaUser = () => {
     navigate("/flutter-users");
@@ -67,23 +70,43 @@ const FlutterPage = () => {
 
   return (
     <ThemeProvider theme={theme}>
-        <Container maxWidth="xl" style={{padding: "20px" }}>
-            <h1 style={{color: "black", marginBottom: "5px", marginTop: "40px" }}>Услуги по разработке приложений Flutter от Mbicycle</h1>
-            <p style={{color: "black", marginBottom: "5px", fontSize: "22px"}}>Мы помогаем стартапам и компаниям любого размера создавать надежное нативное программное обеспечение на основе кроссплатформенной платформы Flutter. Тщательно следуя требованиям наших клиентов, мы всегда учитываем сроки и бюджет проекта, чтобы предложить следующие услуги по разработке:</p>
-            <p style={{color: "black", marginBottom: "5px", fontSize: "22px"}}>Разработка мобильного приложения Flutter для iOS и Android
+        <Container maxWidth="xl" style={{padding: matchesMobile ? "5px" : "20px"  }}>
+            <h1 style={{
+              color: "black", 
+              marginBottom: matchesMobile ? "1px" : "5px", 
+              marginTop: matchesMobile ? "10px" : "50px" }}>Услуги по разработке приложений Flutter от Mbicycle</h1>
+            <p style={{
+              color: "black", 
+              marginBottom: matchesMobile ? "1px" : "5px", 
+              fontSize: matchesMobile ? "14px" : "22px"}}>Мы помогаем стартапам и компаниям любого размера создавать надежное нативное программное обеспечение на основе кроссплатформенной платформы Flutter. Тщательно следуя требованиям наших клиентов, мы всегда учитываем сроки и бюджет проекта, чтобы предложить следующие услуги по разработке:</p>
+            <p style={{
+              color: "black", 
+              marginBottom: matchesMobile ? "1px" : "5px", 
+              fontSize: matchesMobile ? "14px" : "22px"}}>Разработка мобильного приложения Flutter для iOS и Android
             Услуги веб-разработки Flutter
             Миграция веб-приложений на Flutter
             Оптимизация приложений на основе Flutter
             Обслуживание и поддержка приложений Flutter
             Управление командами разработчиков Flutter</p>
         </Container>
-        <div style={{ padding: "20px", textAlign: "center", backgroundSize: "cover" }}>
+        <div style={{ 
+          padding: matchesMobile ? "5px" : "20px", 
+          textAlign: "center", 
+          backgroundSize: "cover" }}>
         <Container maxWidth="xl">
-        <h1 style={{color: "black", marginBottom: "5px", textAlign: "left"}}>Мобильные решения Flutter для разных доменов</h1>
-        <p style={{color: "black", marginBottom: "20px", textAlign: "left", fontSize: "22px"}}>Мы обладаем соответствующими навыками и техническим опытом для предоставления услуг по разработке кроссплатформенных приложений на основе Flutter в следующих областях:</p>
+        <h1 style={{
+          color: "black", 
+          marginBottom: matchesMobile ? "1px" : "5px", 
+          textAlign: "left"}}>
+            Мобильные решения Flutter для разных доменов</h1>
+        <p style={{color: "black", 
+        marginBottom: matchesMobile ? "5px" : "20px", 
+        textAlign: "left", 
+        fontSize: matchesMobile ? "14px" : "22px"}}>
+          Мы обладаем соответствующими навыками и техническим опытом для предоставления услуг по разработке кроссплатформенных приложений на основе Flutter в следующих областях:</p>
           <Grid container spacing={3}>
             {skills.map((skills, index) => (
-              <Grid item xs={4} key={index}>
+              <Grid item sm={matchesDesktop ? 6 : 4} key={index}>
                 <Paper
                   sx={{
                     margin: "0px",
@@ -94,7 +117,8 @@ const FlutterPage = () => {
                     borderCollapse: "collapse",
                     borderBottom: "2px solid #000",
                     "&:hover": {
-                        height: "103%",
+                      width: matchesMobile ? "100%" : "103%",
+                      height: matchesMobile ? "100%" : "103%",
                     } 
                   }}
                 >
@@ -109,14 +133,14 @@ const FlutterPage = () => {
             ))}
           </Grid>
         </Container>
-      </div>
+        </div>
       
       <div style={{ padding: "20px", textAlign: "center", backgroundSize: "cover" }}>
         <Container maxWidth="xl">
         <h1 style={{color: "black", marginBottom: "20px", textAlign: "left"}}>Часто используемый технологический стек Flutter</h1>
           <Grid container spacing={0.3}>
             {tools.map((tool, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item sm={matchesDesktop ? 6 : 3} key={index}>
                 <Paper
                   sx={{
                     margin: "0px",
@@ -127,7 +151,8 @@ const FlutterPage = () => {
                     borderCollapse: "collapse",
                     borderBottom: "2px solid #000",
                     "&:hover": {
-                        height: "103%",
+                      width: matchesMobile ? "100%" : "103%",
+                      height: matchesMobile ? "100%" : "103%",
                     } 
                   }}
                 >

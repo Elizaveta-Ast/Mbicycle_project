@@ -1,9 +1,10 @@
 import React from "react";
 import { IoCloseCircleSharp, IoHammerSharp } from "react-icons/io5";
 import { connect } from "react-redux";
-import { deleteUser } from "./actions";
+import { deleteUser } from "../Redux/actions";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function User({ user, onDelete }) {
   const navigate = useNavigate();
