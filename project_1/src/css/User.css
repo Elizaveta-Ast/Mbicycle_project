@@ -70,36 +70,77 @@ b {
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .user-container {
-    max-width: 100%; /* Полная ширина на мобильных устройствах */
-    border: 3px solid #ccc; /* Более тонкая граница на мобильных */
-    padding: 10px; /* Уменьшенный отступ на мобильных */
+    max-width: 60%;
+    border: 3px solid #ccc; 
+    padding: 10px; 
+    flex-direction: column;
   }
 
   .user-image {
-    margin-right: 0; /* Убираем отступ справа на мобильных */
-    margin-bottom: 10px; /* Добавляем отступ снизу на мобильных */
+    margin-right: 10px;
+    margin-bottom: 10px; 
   }
 
   .user-details {
-    font-size: 18px; /* Уменьшенный размер шрифта на мобильных */
+    font-size: 18px; 
   }
 
   .user-details h3 {
-    font-size: 28px; /* Уменьшенный размер заголовка на мобильных */
+    font-size: 28px; 
   }
 
   .user-actions {
-    position: static; /* Отменяем абсолютное позиционирование на мобильных */
-    display: flex; /* Показываем действия пользователя в потоке на мобильных */
-    justify-content: space-between; /* Распределяем их равномерно на мобильных */
-    margin-top: 10px; /* Добавляем отступ сверху на мобильных */
+    position: static; 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 10px; 
   }
 
   .delete-icon,
   .edit-icon {
     font-size: 20px; /* Уменьшенный размер иконок на мобильных */
     margin: 0; /* Сбрасываем отступы иконок на мобильных */
+  }
+}
+
+@media (max-width: 1450px) {
+  .user-container {
+    border: 3px solid #ccc; 
+    padding: 10px; 
+  }
+
+  .user-image {
+    max-width: 100%;
+    margin-right: 10px;
+  }
+
+  .user-details {
+    font-size: 18px; 
+  }
+
+  .user-details h3 {
+    font-size: 28px; 
+  }
+}
+
+@media (max-width: 1100px) {
+  .user-container {
+    border: 3px solid #ccc; 
+    padding: 10px; 
+  }
+
+  .user-image {
+    max-width: 100%;
+    margin-right: 10px;
+  }
+
+  .user-details {
+    font-size: 16px; 
+  }
+
+  .user-details h3 {
+    font-size: 24px; 
   }
 }

@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-router-dom";
-
+import MenuItem from '@mui/material/MenuItem';
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -57,6 +57,9 @@ function Header() {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{
+                display: { xs: 'flex', md: 'none' },
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -78,6 +81,19 @@ function Header() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              <MenuItem onClick={handleCloseNavMenu} sx={{
+                display: "flex",
+                flexDirection: "column",
+                flexWrap: "wrap",
+              }}>
+                <Button component={Link} to="/users" color="inherit" textAlign="center">
+                  Персонал
+                </Button>
+                <Button component={Link} to="/add" color="inherit" textAlign="center">
+                  Добавление персонала
+                </Button>
+              </MenuItem>
+            
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />

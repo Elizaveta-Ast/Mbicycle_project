@@ -65,27 +65,18 @@ const Mbicycle = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <div
+    <div className="mainImageMbicycle"
       style={{
         backgroundSize: "cover",
         background:
           "url('https://img.freepik.com/free-photo/diverse-businesspeople-having-a-meeting_53876-103954.jpg?w=1380&t=st=1700042427~exp=1700043027~hmac=caaf1866ffe310c695e46d5e7f2fbf6c2797d90a127d55945cec6e7e32529c96') 0 0/cover no-repeat",
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth={"xl"}>
         <Grid container>
-          <Grid item xs={12} sm={5}>
-            <div
-              style={{
-                padding: "50px 0px",
-                marginTop: matchesMobile ? "50px" : "150px",
-                marginBottom: matchesMobile ? "50px" : "150px",
-              }}
-              elevation={3}
-              sx={{
-                textAlign: "left",
-              }}
-            >
+          <Grid item sx={12} sm={5}>
+            <div className="mainTextMbicycle"
+              elevation={3}>
               <Typography variant="h4" gutterBottom className="mainText">
                 Специалисты Mbicycle
               </Typography>
