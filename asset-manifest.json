@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Mbicycle_project/project_1/public/index.html/static/css/main.e2c21e59.css",
+    "main.js": "/Mbicycle_project/project_1/public/index.html/static/js/main.ffbf954b.js",
+    "index.html": "/Mbicycle_project/project_1/public/index.html/index.html",
+    "main.e2c21e59.css.map": "/Mbicycle_project/project_1/public/index.html/static/css/main.e2c21e59.css.map",
+    "main.ffbf954b.js.map": "/Mbicycle_project/project_1/public/index.html/static/js/main.ffbf954b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2c21e59.css",
+    "static/js/main.ffbf954b.js"
+  ]
+}
