@@ -112,7 +112,12 @@ const Mbicycle = () => {
                     height: matchesMobile ? "100%" : "102%",
                   },
                 }}
-                onClick={() => navigation(rectangle.navigate) && openWebsite(rectangle.webSite)}
+                onClick={() => {
+                  navigation(rectangle.navigate);
+                  if (rectangle.webSite) {
+                    openWebsite(rectangle.webSite);
+                  }
+                }}
               >
                 <div
                   style={{
