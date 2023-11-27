@@ -1,7 +1,6 @@
 import React from 'react'
 import User from './User'
 import { connect } from 'react-redux';
-import { deleteUser, editUser } from '../Redux/actions';
 
 
 function Users(props) {
@@ -12,8 +11,6 @@ function Users(props) {
         props.users.map((el) => (
           <div key={el.id}>
             <User
-              onEdit={props.onEdit}
-              onDelete={props.onDelete}
               user={el}
             />
           </div>
@@ -31,9 +28,4 @@ const mapStateToProps = (state) => ({
   users: state.users,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onDelete: (id) => dispatch(deleteUser(id)),
-  onEdit: (user) => dispatch(editUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps)(Users);

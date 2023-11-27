@@ -1,12 +1,10 @@
-import React, {useState} from "react"
+import React from "react"
 import Header from "./components/Header"
 import Users from "./components/Users/Users"
-import AddUser from "./components/Forms/AddUser"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mbicycle from "./components/Mbicycle"
 import store from "./components/Redux/store";
 import { Provider } from "react-redux";
-import EditUser from "./components/Forms/EditUser";
 import JavaPage from "./components/Cards/JavaPage"
 import NETPage from "./components/Cards/NETPage";
 import FlutterPage from "./components/Cards/FlutterPage";
@@ -24,22 +22,6 @@ function App() {
           <Routes>
             {/* Главная страница */}
             <Route path="/" element={<Mbicycle />} />
-
-            {/* Страница добавления пользователя */}
-            <Route path="/add" element={
-                <aside>
-                  <AddUser />
-                </aside>
-              }
-            />
-
-             {/* Маршрут для отображения формы редактирования */}
-             <Route path="/edit" element={
-                <main>
-                  <EditUser />
-                </main>
-              }
-            />
 
             {/* Страница персонала */}
             <Route path="/users" element={
