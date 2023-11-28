@@ -21,7 +21,7 @@ function App() {
           <Header />
           <Routes>
             {/* Главная страница */}
-            <Route path="/" element={<Mbicycle />} />
+            <Route path="/main" element={<Mbicycle />} />
 
             {/* Страница персонала */}
             <Route path="/users" element={
