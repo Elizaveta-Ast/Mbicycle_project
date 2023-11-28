@@ -35,7 +35,7 @@ function Header() {
           <Typography
             variant="h6"
             noWrap
-            component={Link} to="/"
+            component={Link} to="/main"
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
@@ -89,8 +89,8 @@ function Header() {
                 <Button component={Link} to="/users" color="inherit" textAlign="center">
                   Персонал
                 </Button>
-                <Button component={Link} to="/add" color="inherit" textAlign="center">
-                  Добавление персонала
+                <Button component={Link} to="/projects" color="inherit" textAlign="center">
+                  Проекты
                 </Button>
               </MenuItem>
             
@@ -118,8 +118,8 @@ function Header() {
           <Button component={Link} to="/users" color="inherit">
               Персонал
             </Button>
-            <Button component={Link} to="/add" color="inherit">
-              Добавление персонала
+            <Button component={Link} to="/projects" color="inherit">
+               Проекты
             </Button>
           </Box>
         </Toolbar>
