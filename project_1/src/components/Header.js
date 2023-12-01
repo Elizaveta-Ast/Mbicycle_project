@@ -11,9 +11,16 @@ import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
+import { useState } from 'react';
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [activePath, setActivePath] = useState("/");
+
+  // Обработчик изменения активного пути
+  const handlePathChange = (path) => {
+    setActivePath(path);
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,6 +40,8 @@ function Header() {
         <Toolbar >
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
+            disabled={activePath === "/"} 
+            onClick={() => handlePathChange("/")}
             variant="h6"
             noWrap
             component={Link} to="/"
@@ -44,6 +53,9 @@ function Header() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+                "&.Mui-disabled": {
+                  color:"#e4e4e4",
+                }
             }}
           >
             Mbicycle
@@ -86,10 +98,12 @@ function Header() {
                 flexDirection: "column",
                 flexWrap: "wrap",
               }}>
-                <Button component={Link} to="/users" color="inherit" textAlign="center">
+                <Button component={Link} to="/users" color="inherit" textAlign="center"
+                disabled={activePath === "/users"}
+                onClick={() => handlePathChange("/users")}>
                   Персонал
                 </Button>
-                <Button component={Link} to="/add" color="inherit" textAlign="center">
+                <Button component={Link} to="/add" color="inherit" textAlign="center" disabled={activePath === "/add"} onClick={() => handlePathChange("/add")}>
                   Добавление персонала
                 </Button>
               </MenuItem>
@@ -115,10 +129,18 @@ function Header() {
             Mbicycle
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Button component={Link} to="/users" color="inherit">
+          <Button component={Link} to="/users" color="inherit"  disabled={activePath === "/users"} onClick={() => handlePathChange("/users")}
+           sx={{
+            "&.Mui-disabled": {
+              color:"#e4e4e4",
+            },}}>
               Персонал
             </Button>
-            <Button component={Link} to="/add" color="inherit">
+            <Button component={Link} to="/add" color="inherit" disabled={activePath === "/add"} onClick={() => handlePathChange("/add")}
+            sx={{
+              "&.Mui-disabled": {
+                color:"#e4e4e4",
+              },}}>
               Добавление персонала
             </Button>
           </Box>

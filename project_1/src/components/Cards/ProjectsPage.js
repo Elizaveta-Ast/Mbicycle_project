@@ -88,7 +88,8 @@ const ProjectsPage = () => {
             <Item key={index} item={projectNet} />
             ))}
         </Container>
-        <Container maxWidth="xl" style={{ marginButton: "20px",}}>
+        <div style={{marginBottom: "40px"}}>
+          <Container maxWidth="xl" style={{ marginButton: "20px",}}>
             <h1 style={{color: "black", marginTop: "25px"}}>Взгляните на несколько приложений на основе Flutter, разработанных экспертами Mbicycle:</h1>
             <Carousel maxWidth="xl">
                 {projectsFlutter.map((projectFlutter, index) => (
@@ -96,6 +97,7 @@ const ProjectsPage = () => {
                 ))}
             </Carousel>
         </Container>
+        </div>
     </ThemeProvider>
   );
 };
