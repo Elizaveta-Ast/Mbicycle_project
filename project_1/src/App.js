@@ -14,6 +14,9 @@ import ProjectsPage from "./components/Cards/ProjectsPage";
 import JavaUsers from "./components/Users/JavaUsers";
 import NETUsers from "./components/Users/NETUsers";
 import FlutterUsers from "./components/Users/FlutterUsers";
+import EntrUser from "./components/Forms/EntrUser";
+import EntrAdmin from "./components/Forms/EntrAdmin";
+import UserAccaunt from "./components/Accaunts/UserAccaunt";
 
 function App() {
   return (
@@ -29,6 +32,27 @@ function App() {
             <Route path="/add" element={
                 <aside>
                   <AddUser />
+                </aside>
+              }
+            />
+
+            <Route path="/userAccaunt" element={
+                <aside>
+                  <UserAccaunt />
+                </aside>
+              }
+            />
+
+            <Route path="/entrUser" element={
+                <aside>
+                  <EntrUser />
+                </aside>
+              }
+            />
+
+            <Route path="/entrAdmin" element={
+                <aside>
+                  <EntrAdmin />
                 </aside>
               }
             />

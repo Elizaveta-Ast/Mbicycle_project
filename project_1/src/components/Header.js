@@ -12,10 +12,23 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [activePath, setActivePath] = useState("/");
+
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   // Обработчик изменения активного пути
   const handlePathChange = (path) => {
@@ -144,6 +157,38 @@ function Header() {
               Добавление персонала
             </Button>
           </Box>
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem component={Link} to="/entrAdmin" color="inherit" disabled={activePath === "/entrAdmin"} onClick={() => {handlePathChange("/entrAdmin"); handleClose()}}>Вход как администратор</MenuItem>
+                <MenuItem component={Link} to="/entrUser" color="inherit" disabled={activePath === "/entrUser"} onClick={() => {handlePathChange("/entrUser"); handleClose()}}>Вход как сотрудник</MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
