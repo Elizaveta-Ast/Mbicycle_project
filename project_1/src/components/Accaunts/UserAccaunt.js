@@ -10,7 +10,7 @@ import axios from "axios";
 
 const theme = createTheme();
 
-function UserAccount({ user, onDelete }) {
+function UserAccaunt({ user, onDelete }) {
   const navigate = useNavigate();
   const matchesMobile = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesDesktop = useMediaQuery(theme.breakpoints.down("md"));
@@ -136,3 +136,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(UserAccount);
+
+export default UserAccaunt;
