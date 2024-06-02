@@ -135,6 +135,4 @@ const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => dispatch(deleteUser(id)),
 });
 
-export default connect(null, mapDispatchToProps)(UserAccount);
-
-export default UserAccaunt;
+export default connect(null, mapDispatchToProps)(UserAccaunt);
